@@ -68,7 +68,7 @@
                     Item 1
                   </template>
                   <MenuItem name="option1" >Option 1</MenuItem>
-                  <MenuItem name="1-2" >Option 2</MenuItem>
+                  <MenuItem name="calTender" >计算标底</MenuItem>
                   <MenuItem name="1-3">Option 3</MenuItem>
                 </Submenu>
                 <Submenu name="2">

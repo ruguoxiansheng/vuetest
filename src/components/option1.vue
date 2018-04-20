@@ -1,7 +1,7 @@
 <template>
   <div>
     <Table border ref="selection" :columns="columns4" :data="data1" height="400"></Table>
-    <Page :total="dataCount" :page-size="pageSize" show-total  @on-change="changepage"></Page>
+    <Page :total="dataCount" :current="pageNum" :page-size="pageSize" show-total  @on-change="changepage"></Page>
   </div>
 </template>
 <script>
@@ -28,7 +28,8 @@
           }
         ],
         data1: [ ],
-        dataCount:0
+        dataCount:0,
+        pageNum:4
       }
     },
     methods :{
@@ -59,7 +60,20 @@
         })
       .catch(function (error) {
         console.log(error);
+       _this.instance('error',error);
       });
+      },
+      instance(type,error) {
+        const title = 'Title';
+        const content = '<p>Content of dialog</p><p>Content of dialog</p>';
+        switch (type) {
+          case 'error':
+            this.$Modal.error({
+              title: title,
+              content: error.response.data.message
+            });
+            break;
+        }
       }
     },
   created: function () {
