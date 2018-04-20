@@ -10,7 +10,7 @@
 
     <div style="width:500px;padding-top:20px">
 
-     <Input v-model="companyValue" number placeholder="输入报价..." style="width: 200px"></Input>
+     <Input v-model="companyValue" @on-enter="reEnter" number placeholder="输入报价..." style="width: 200px" ></Input>
       <Select v-model="model3" style="width:100px">
         <Option v-for="item in unit" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-
+  import inputView from '@/content/inputView.vue'
   export default {
 
     data () {
@@ -80,14 +80,25 @@
       reEnter() {
         // 校验companyValue
         this.total +=1;
-        var cv={};
-        cv[this.total]=this.companyValue;
-        this.inputObj.push(cv);
+        //  序号   //  companyValue
+        var ordN={"orderNumber" :this.total,"companyValue" :this.companyValue};
+        this.inputObj.push(ordN);
         console.log(this.inputObj);
       },
+      // 弹出输入的价格
       queryInput(){
-
+        const _this = this;
+        this.$Modal.info({
+          render: (h) => {
+            return h(inputView, {
+              props: {
+                data : _this.inputObj
+              }
+            })
+          }
+        })
       }
-    }
+   }
+
   }
 </script>

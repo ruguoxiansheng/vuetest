@@ -1,12 +1,23 @@
-<!--这个组件用户查看所有的数据，并且支持编辑-->
 <template>
-    <div></div>
+  <Table :columns="columns" :data="data"></Table>
 </template>
-
-
 <script>
-    export default {}
+  export default {
+    props: ['data'],
+    data () {
+      return {
+        columns: [
+          {
+            title: '序号',
+            key: 'orderNumber'
+          },
+          {
+            title: '公司报价',
+            key: 'companyValue'
+          }
+        ],
+        data: [ ]
+      }
+    }
+  }
 </script>
-
-<style scoped>
-</style>
