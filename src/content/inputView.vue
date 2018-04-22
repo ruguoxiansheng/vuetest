@@ -1,21 +1,13 @@
+<!--这个弹出框，用于查询输入的！-->
 <template>
   <Table :columns="columns" :data="data"></Table>
 </template>
 <script>
   export default {
-    props: ['data'],
+    props: ['data','columns'],
     data () {
       return {
-        columns: [
-          {
-            title: '序号',
-            key: 'orderNumber'
-          },
-          {
-            title: '公司报价',
-            key: 'companyValue'
-          }
-        ],
+        columns: [],
         data: [ ]
       }
     }
