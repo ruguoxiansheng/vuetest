@@ -35,24 +35,24 @@
           <div class="layout-nav">
             <MenuItem name="1">
               <Icon type="ios-navigate"></Icon>
-              Item 1
+              <router-link to="/userCenter">个人中心</router-link>
             </MenuItem>
             <MenuItem name="2">
               <Icon type="ios-keypad"></Icon>
-              Item 2
+              <router-link to="/calCenter"> 计算中心</router-link>
             </MenuItem>
-            <MenuItem name="3">
-              <Icon type="ios-analytics"></Icon>
-              Item 3
-            </MenuItem>
-            <MenuItem name="4">
-              <Icon type="ios-paper"></Icon>
-              Item 4
-            </MenuItem>
+            <Submenu  name="3" >
+              <template slot="title">
+                <Icon type="stats-bars"></Icon>
+                <router-link to="/appCenter"> 应用中心</router-link>
+              </template>
+              <MenuItem name="3-1">中标查询</MenuItem>
+            </Submenu >
           </div>
         </Menu>
       </Header>
-      <Layout :style="{padding: '0 50px'}">
+      <router-view></router-view>
+      <!--<Layout :style="{padding: '0 50px'}">
         <Breadcrumb :style="{margin: '16px 0'}">
           <BreadcrumbItem>Home</BreadcrumbItem>
           <BreadcrumbItem>Components</BreadcrumbItem>
@@ -102,7 +102,7 @@
             </Content>
           </Layout>
         </Content>
-      </Layout>
+      </Layout>-->
       <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
     </Layout>
   </div>
