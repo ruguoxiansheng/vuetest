@@ -1,26 +1,45 @@
 <template>
-  <div>
+  <Form >
 
-  <div style="width:500px">
-    <Button type="primary" @click="disabled=!disabled">锁定编号</Button>
-  <Select v-model="model1" style="width:200px" :disabled="disabled">
-    <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-  </Select>
-  </div>
+    <FormItem>
+        <span>开标时间：</span>
+        <DatePicker type="date" placeholder="选择开标时间...." v-model="date"></DatePicker>
+    </FormItem>
 
-    <div style="width:500px;padding-top:20px">
+
+    <FormItem >
+
+      <Button type="primary" @click="disabled=!disabled">锁定编号</Button>
+      <Select v-model="select" style="width:200px" :disabled="disabled">
+        <Option v-for="item in projectNumber" :value="item.value" :key="item.value">{{ item.label }}</Option>
+      </Select>
+
+    </FormItem>
+
+    <FormItem>
+      <div >
+       <!--<Table width="550" style="margin-right: auto;margin-left:auto" :columns="randColumn" :data="randData"></Table>-->
+        <div v-for="(value, key) in items">
+          <i-input disabled :value="key" style="width:40px"> </i-input><i-input :value="value" style="width:100px"></i-input>
+        </div>
+      </div>
+    </FormItem>
+
+    <FormItem>
       <Input v-model="companyName"  number placeholder="请输入公司..." style="width: 200px" clearable ></Input>
-     <Input v-model="companyValue"  @on-enter="reEnter"  placeholder="输入报价..." style="width: 200px"></Input>
-      <Select v-model="model3" style="width:100px">
+      <Input v-model="companyValue"  placeholder="输入报价..." style="width: 200px"></Input>
+      <Select v-model="defaultUnit" style="width:100px">
         <Option v-for="item in unit" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
       <Button type="primary" @click="reEnter">确认报价</Button>
-    </div>
-  <div style="width:500px;padding-top:20px">
-    <Button type="primary" @click="queryInput">查询输入</Button>
-    <Button type="primary" @click="calTender">计算标底</Button>
-</div>
-  </div>
+    </FormItem>
+
+    <FormItem>
+        <Button type="primary" @click="queryInput">查询输入</Button>
+        <Button type="primary" @click="calTender">计算标底</Button>
+    </FormItem>
+
+  </Form>
 </template>
 <script>
   import inputView from '@/content/inputView.vue';
@@ -30,6 +49,12 @@
       return {
         total :0,
         inputObj :[],
+        select: '',
+        date: '',
+        disabled: true,
+        companyValue:'',
+        companyName:'',
+        defaultUnit:'万元',
         columns : [
           {
             title: '序号',
@@ -58,8 +83,7 @@
             label:'千万元'
           }
         ],
-        model3:'万元',
-        cityList: [
+        projectNumber: [
           {
             value: '皖E20180420-1',
             label: '皖E20180420-1'
@@ -67,32 +91,66 @@
           {
             value: '皖E20180420-2',
             label: '皖E20180420-2'
-          },
-          {
-            value: '皖E20180420-3',
-            label: '皖E20180420-3'
-          },
-          {
-            value: '皖E20180420-4',
-            label: '皖E20180420-4'
-          },
-          {
-            value: '皖E20180420-5',
-            label: '皖E20180420-5'
-          },
-          {
-            value: '皖E20180420-6',
-            label: '皖E20180420-6'
           }
         ],
-        model1: '',
-        disabled: true,
-        companyValue:'',
-        companyName:''
+        items: {
+          x: 0,
+          y: 0,
+          z: 0
+        },
+        randColumn: [
+          {
+            title: 'X',
+            key: 'x'
+          },
+          {
+            title: 'Y',
+            key: 'y'
+          },
+          {
+            title: 'Z',
+            key: 'z'
+          },
+          {
+            title: 'M',
+            key: 'm'
+          },
+          {
+            title: 'N',
+            key: 'n'
+          },
+          {
+            title: 'Action',
+            key: 'action',
+            fixed: 'right',
+            width: 80,
+            height:50,
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {
+                  props: {
+                    click:"randomEdit",
+                    type: 'text',
+                    size: 'small'
+                  }
+                }, '编辑')
+              ]);
+            }
+          }
+        ],
+        randData: [
+          {
+            x: 0,
+            y: 0,
+            z: 0,
+            m:0,
+            n:0
+          }
+        ]
       }
-    },
-    methods:{
-
+    }// end of data
+    ,
+    methods :{
       //  记录所有的输入到inputObj
       reEnter() {
         // 校验companyValue
@@ -139,8 +197,22 @@
             console.log(error);
             _this.instance('error',error);
           });
-      }
+      },
+
+      // 编辑随机数
+      randomEdit() {
+        const _this = this;
+        this.$Modal.info({
+          render: (h) => {
+            return h(randomEdit, {
+              props: {
+                randData:_this.randData
+              }
+            })
+          }
+        })
       }
 
+    }// end of methods
   }
 </script>

@@ -22,8 +22,8 @@
     margin: 0 auto;
     margin-right: 20px;
   }
-  .layout-footer-center{
-    text-align: center;
+  .router-link-active {
+    color: #2d8cf0;
   }
 </style>
 <template>
@@ -35,25 +35,26 @@
           <div class="layout-nav">
             <MenuItem name="1">
               <Icon type="ios-navigate"></Icon>
-              <router-link to="/userCenter">个人中心</router-link>
+              <router-link to="/userCenter" :style="router-link-active">个人中心</router-link>
             </MenuItem>
             <MenuItem name="2">
               <Icon type="ios-keypad"></Icon>
-              <router-link to="/calCenter"> 计算中心</router-link>
+              <router-link to="/calCenter" > 计算中心</router-link>
             </MenuItem>
             <Submenu  name="3" >
               <template slot="title">
                 <Icon type="stats-bars"></Icon>
-                <router-link to="/appCenter"> 应用中心</router-link>
+                <router-link to="/appCenter" > 应用中心</router-link>
               </template>
               <MenuItem name="3-1">中标查询</MenuItem>
             </Submenu >
           </div>
         </Menu>
       </Header>
+      <Layout>
       <router-view></router-view>
-      
-      <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+      </Layout>
+
     </Layout>
   </div>
   </div>
@@ -64,7 +65,6 @@
       select(name) {
         this.$router.push(name);
       }
-
      }
   }
 </script>

@@ -7,24 +7,19 @@ import option1 from '@/components/option1'
 import calCenter from '@/components/calCenter'
 // 计算标底模块
 import calTender from '@/components/calTender'
-
-
 // 用户中心
 import userCenter from '@/components/usercenter'
 // 账单
 import bill from '@/components/bill'
-
 // 账户查询
 import accountQuery from '@/components/accountQuery'
-
 // option3
 import option3 from '@/components/option3'
-
 // 公司认证
 import companyAuthentication from '@/components/companyAuthentication'
-
 // 应用中心
 import appCenter from '@/components/appCenter'
+
 
 
 Vue.use(Router)
@@ -66,7 +61,6 @@ export default new Router({
               name : 'companyAuthentication',
               component : companyAuthentication
             }
-
           ]
         },
         {
