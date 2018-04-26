@@ -42,9 +42,9 @@
             <Icon type="search"></Icon>
             <span>账户查询</span>
           </MenuItem>
-          <MenuItem name="option3">
+          <MenuItem name="option">
             <Icon type="settings"></Icon>
-            <span>Option 3</span>
+            <span>Option</span>
           </MenuItem>
           <MenuItem name="companyAuthentication">
             <Icon type="settings"></Icon>

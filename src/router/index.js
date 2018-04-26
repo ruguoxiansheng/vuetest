@@ -14,7 +14,7 @@ import bill from '@/components/bill'
 // 账户查询
 import accountQuery from '@/components/accountQuery'
 // option3
-import option3 from '@/components/option3'
+import option from '@/components/option'
 // 公司认证
 import companyAuthentication from '@/components/companyAuthentication'
 // 应用中心
@@ -51,9 +51,9 @@ export default new Router({
             },
             // option3
             {
-              path: 'option3',
-              name : 'option3',
-              component : option3
+              path: 'option',
+              name : 'option',
+              component : option
             },
             // 公司认证
             {

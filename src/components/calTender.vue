@@ -1,37 +1,46 @@
 <template>
-  <Form >
+  <Form :rules="ruleValidate">
 
     <FormItem>
-        <span>开标时间：</span>
+      <v-font style="font-size: 16px;margin-right: 10px">开标时间：  </v-font>
         <DatePicker type="date" placeholder="选择开标时间...." v-model="date"></DatePicker>
     </FormItem>
 
 
     <FormItem >
 
-      <Button type="primary" @click="disabled=!disabled">锁定编号</Button>
+     <!-- <Button type="primary" @click="disabled=!disabled">锁定编号</Button>-->
+      <v-font style="font-size: 16px">项目编号：</v-font>
       <Select v-model="select" style="width:200px" :disabled="disabled">
         <Option v-for="item in projectNumber" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
 
     </FormItem>
 
-    <FormItem>
-      <div >
+    <FormItem prop="companyNameValid">
+
        <!--<Table width="550" style="margin-right: auto;margin-left:auto" :columns="randColumn" :data="randData"></Table>-->
+      <v-font style="font-size: 16px">随机号码：</v-font>
+
         <div v-for="(value, key) in items">
           <i-input disabled :value="key" style="width:40px"> </i-input><i-input :value="value" style="width:100px"></i-input>
         </div>
-      </div>
     </FormItem>
 
+    <FormItem prop="companyNameValid" label="公司名称：">
+     <!-- <v-font style="font-size: 16px">公司名称：</v-font>-->
+
+      <Input v-model="companyName"  placeholder="请输入公司..." style="width: 200px" clearable ></Input>
+    </FormItem>
+    <FormItem prop="companyValueValid">
+      <v-font style="font-size: 16px">公司报价：</v-font><Input v-model="companyValue"  placeholder="输入报价..." style="width: 200px"></Input>
+    </FormItem>
     <FormItem>
-      <Input v-model="companyName"  number placeholder="请输入公司..." style="width: 200px" clearable ></Input>
-      <Input v-model="companyValue"  placeholder="输入报价..." style="width: 200px"></Input>
+      <v-font style="font-size: 16px"> 单位：</v-font>
       <Select v-model="defaultUnit" style="width:100px">
         <Option v-for="item in unit" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
-      <Button type="primary" @click="reEnter">确认报价</Button>
+      <Button style="margin-left: 20px" type="primary" @click="reEnter">确认报价</Button>
     </FormItem>
 
     <FormItem>
@@ -146,7 +155,12 @@
             m:0,
             n:0
           }
-        ]
+        ],
+        ruleValidate: {
+          companyNameValid:[
+            { required: true, message: '公司名称不能为空....', trigger: 'blur' },
+          ],
+        }
       }
     }// end of data
     ,
