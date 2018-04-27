@@ -20,6 +20,11 @@ import companyAuthentication from '@/components/companyAuthentication'
 // 应用中心
 import appCenter from '@/components/appCenter'
 
+// 登录页面
+import login from '@/components/login'
+// 注册页面
+import register from '@/components/register'
+
 
 
 Vue.use(Router)
@@ -76,10 +81,23 @@ export default new Router({
             }
           ]
         },
+        //  应用中心
         {
           path: '/appCenter',
           name : 'appCenter',
           component: appCenter
+        },
+        // 登录页面
+        {
+          path: '/login',
+          name : 'login',
+          component: login
+        },
+        // 注册页面
+        {
+          path: '/register',
+          name : 'register',
+          component: register
         }
         ]
     }
